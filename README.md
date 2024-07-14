@@ -1,14 +1,15 @@
-# PythonScriptExecutor
+# JavaCSVParser
 
-**PythonScriptExecutor** is a Java library that allows you to run Python scripts from within your Java code and gather their results for use in your applications. It provides both synchronous and asynchronous methods to execute the scripts, with support for logging and custom exceptions.
+**JavaCSVParser** is a Java library designed to facilitate the conversion of CSV data fetched via a Python script into various formats, including a List<String>, a JSONArray, or a JSON formatted string. It integrates with the PythonScriptExecutor class for executing Python scripts asynchronously to retrieve CSV data and the data is available in Java code to be used for Java Applications.
 
 ## Features
 
-- **Synchronous Execution**: Run Python scripts and get results directly.
-- **Asynchronous Execution**: Run Python scripts without blocking the main thread, using `CompletableFuture`.
-- **Logging**: Enable or disable logging and set log levels to monitor script execution.
-- **Custom Exceptions**: Handle invalid file paths and extensions gracefully.
-- **Cross-Platform Support**: Automatically detects the operating system and uses the appropriate Python executable (`python` for Windows, `python3` for other OS).
+- **CSV to List Conversion**: Convert CSV data fetched via a Python script into a List<String>, where each string element represents a line from the CSV file.
+- **CSV to JSONArray Conversion**: Convert CSV data into a JSONArray object, enabling structured JSON representation of the CSV content.
+- **CSV to JSON String Conversion**: Generate a JSON formatted string from CSV data using a JSONArray, suitable for data exchange and storage in JSON format.
+- **Custom Exceptions**
+- **Cross-Platform Support**
+- Uses **pythonscriptexecutor** library at the backend.
 
 ## Installation
 
@@ -27,97 +28,30 @@ Add the following dependency to your `pom.xml` if you are using Maven:
 # Note
 Ensure your Python scripts (script.py in this case) have a __main__ section defined as shown in the example below. This ensures compatibility and proper execution when using the PythonScriptExecutor library in your Java code else it wont run.
 ```code
-# Example Python script: script.py
-def main():
-    # Your script logic here
-    print("Hello from Python!")
+import io.github.shubham10divakar.JavaCSVParser;
+import org.json.JSONArray;
 
-if __name__ == "__main__":
-    main()
-```
-
-## Synchronous Execution without Arguments
-```code
-import io.github.shubham10divakar.PythonScriptExecutor;
-
-public class Main {
-    public static void main(String[] args) {
-        PythonScriptExecutor executor = new PythonScriptExecutor();
-        String output = executor.executePythonScriptNoArgsSync("path/to/script.py", true, Level.INFO);
-        System.out.println(output);
-    }
-}
-```
-
-## Asynchronous Execution without Arguments
-```code
-import io.github.shubham10divakar.PythonScriptExecutor;
-
-import java.util.concurrent.CompletableFuture;
+import java.util.List;
 import java.util.logging.Level;
 
-public class Main {
+class Test {
     public static void main(String[] args) {
-        PythonScriptExecutor executor = new PythonScriptExecutor();
-        CompletableFuture<String> future = executor.executePythonScriptNoArgsAsync("path/to/script.py", true, Level.INFO);
-        
-        future.thenAccept(output -> {
-            System.out.println("Script output: " + output);
-        }).exceptionally(ex -> {
-            System.err.println("Script execution failed: " + ex.getMessage());
-            return null;
-        });
+        JavaCSVParser obj = new JavaCSVParser();
+
+        String csvfile = "C:\\D\\my docs\\my docs\\projects\\springbootnetworkproject\\PythonScriptExecutor\\Airplane_Crashes_and_Fatalities_Since_1908.csv";
+
+        List<String> str = obj.csvToStringList(csvfile);
+
+        String jsonString = obj.csvToJSONArrayString(csvfile);
+
+        JSONArray jsonArray = obj.csvToJSONArray(csvfile);
+
+    }
+
+    public static void display(String str){
+        System.out.println(str);
     }
 }
-```
-
-## Synchronous Execution with Arguments
-```code
-import io.github.shubham10divakar.PythonScriptExecutor;
-
-public class Main {
-    public static void main(String[] args) {
-        PythonScriptExecutor executor = new PythonScriptExecutor();
-        String output = executor.executePythonScriptWithArgsSync("path/to/script.py", true, Level.INFO, "arg1", "arg2");
-        System.out.println(output);
-    }
-}
-```
-
-## ASynchronous Execution with Arguments
-```code
-import io.github.shubham10divakar.PythonScriptExecutor;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
-
-public class Main {
-    public static void main(String[] args) {
-        PythonScriptExecutor executor = new PythonScriptExecutor();
-        CompletableFuture<String> future = executor.executePythonScriptWithArgsAsync("path/to/script.py", true, Level.INFO, "arg1", "arg2");
-        
-        future.thenAccept(output -> {
-            System.out.println("Script output: " + output);
-        }).exceptionally(ex -> {
-            System.err.println("Script execution failed: " + ex.getMessage());
-            return null;
-        });
-    }
-}
-```
-
-## Logging
-## Enable or disable logging and set the logging level to track the script execution process.
-```code
-import io.github.shubham10divakar.internal.Logger.Logger;
-
-public class Main {
-    public static void main(String[] args) {
-        Logger.setLoggingEnabled(true);
-        Logger.setLogLevel(Level.INFO);
-    }
-}
-
 ```
 
 ## License
