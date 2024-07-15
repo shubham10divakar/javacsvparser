@@ -1,6 +1,6 @@
 # JavaCSVParser
 
-**JavaCSVParser** is a Java library designed to facilitate the conversion of CSV data fetched via a Python script into various formats, including a List<String>, a JSONArray, or a JSON formatted string. It integrates with the PythonScriptExecutor class for executing Python scripts asynchronously to retrieve CSV data and the data is available in Java code to be used for Java Applications.
+**JavaCSVParser** is a Java library designed to facilitate the conversion of CSV data into various formats, including a List<String>, a JSONArray, or a JSON formatted string. It integrates the PythonScriptExecutor for executing Python scripts asynchronously to retrieve CSV data and the data is available in Java code to be used for Java Applications.
 
 ## Features
 

@@ -6,10 +6,10 @@
 
     <groupId>io.github.shubham10divakar</groupId>
     <artifactId>javacsvparser</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
 
     <name>JavaCSVParser</name>
-    <description>This Java library allows you to run Python scripts from within Java code and gather their results for use in your Java applications. It provides both synchronous and asynchronous methods to execute the scripts, with support for logging and custom exceptions.</description>
+    <description>JavaCSVParser is a Java library designed to facilitate the conversion of CSV data into various formats, including a List, a JSONArray, or a JSON formatted string. It integrates the PythonScriptExecutor class for executing Python scripts asynchronously to retrieve CSV data and the data is available in Java code to be used for Java Applications.</description>
     <url>https://github.com/shubham10divakar/javacsvparser</url>
 
     <licenses>
@@ -41,9 +41,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/shubham10divakar/pythonscriptexecutor.git</connection>
-        <developerConnection>scm:git:ssh://shubham10divakar/pythonscriptexecutor.git</developerConnection>
-        <url>http://github.com/shubham10divakar/pythonscriptexecutor/tree/main</url>
+        <connection>scm:git:git://github.com/shubham10divakar/javacsvparser.git</connection>
+        <developerConnection>scm:git:ssh://shubham10divakar/javacsvparser.git</developerConnection>
+        <url>http://github.com/shubham10divakar/javacsvparser/tree/main</url>
     </scm>
 
     <properties>
@@ -53,6 +53,14 @@
     </properties>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>io/github/shubham10divakar/read_csv_data.py</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.sonatype.central</groupId>
